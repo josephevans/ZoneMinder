@@ -551,7 +551,7 @@ Monitor::Monitor(
         while( shared_data->last_write_index == (unsigned int)image_buffer_count 
                && shared_data->last_write_time == 0)
         {
-            Warning( "Waiting for capture daemon" );
+            Info( "Waiting for capture daemon" );
             sleep( 1 );
         }
         ref_image.Assign( width, height, camera->Colours(), camera->SubpixelOrder(), image_buffer[shared_data->last_write_index].image->Buffer(), camera->ImageSize());
