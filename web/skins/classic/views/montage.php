@@ -47,7 +47,7 @@ foreach( dbFetchAll( $sql ) as $row )
     if ( isset( $_REQUEST['scale'] ) )
         $scale = validInt($_REQUEST['scale']);
     else if ( isset( $_COOKIE['zmMontageScale'] ) )
-        $scale = validInt($_REQUEST['zmMontageScale']);
+        $scale = validInt($_COOKIE['zmMontageScale']);
     else
         $scale = reScale( SCALE_BASE, $row['DefaultScale'], ZM_WEB_DEFAULT_SCALE );
 
