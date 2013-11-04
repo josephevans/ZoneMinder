@@ -146,6 +146,11 @@ int RemoteCameraHttp::ReadData( Buffer &buffer, int bytes_expected )
     }
     else if ( n_found < 0)
     {
+        if ( errno == EINTR )
+        {
+            Info( "Got interrupt signal during select()" );
+            return( 0 );
+        }
         Error( "Select error: %s", strerror(errno) );
         return( -1 );
     }
