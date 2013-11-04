@@ -46,6 +46,8 @@ foreach( dbFetchAll( $sql ) as $row )
     }
     if ( isset( $_REQUEST['scale'] ) )
         $scale = validInt($_REQUEST['scale']);
+    else if ( isset( $_COOKIE['zmMontageScale'] ) )
+        $scale = validInt($_REQUEST['zmMontageScale']);
     else
         $scale = reScale( SCALE_BASE, $row['DefaultScale'], ZM_WEB_DEFAULT_SCALE );
 
@@ -119,7 +121,7 @@ if ( ZM_WEB_STREAM_METHOD == 'mpeg' && ZM_MPEG_LIVE_FORMAT )
 }
 else
 {
-    $streamSrc = getStreamSrc( array( "mode=jpeg", "monitor=".$monitor['Id'], "scale=".$scale, "maxfps=".ZM_WEB_VIDEO_MAXFPS ) );
+    $streamSrc = getStreamSrc( array( "mode=jpeg", "monitor=".$monitor['Id'], "scale=100", "maxfps=".ZM_WEB_VIDEO_MAXFPS ) );
     if ( canStreamNative() )
     {
         outputImageStream( "liveStream".$monitor['Id'], $streamSrc, reScale( $monitor['Width'], $scale ), reScale( $monitor['Height'], $scale ), validHtmlStr($monitor['Name']) );
