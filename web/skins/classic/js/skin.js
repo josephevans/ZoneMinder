@@ -52,7 +52,7 @@ var popupSizes = {
     'monitorpreset':{ 'width': 400, 'height': 200 },
     'monitorprobe': { 'width': 500, 'height': 240 },
     'monitorselect':{ 'width': 160, 'height': 200 },
-    'montage':      { 'width': -1, 'height': -1 },
+    'montage':      { 'width': 700, 'height': 700 },
     'optionhelp':   { 'width': 400, 'height': 320 },
     'options':      { 'width': 960, 'height': 620 },
     'preset':       { 'width': 300, 'height': 120 },
