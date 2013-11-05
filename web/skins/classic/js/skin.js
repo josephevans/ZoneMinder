@@ -87,6 +87,12 @@ function getPopupSize( tag, width, height )
     }
     if ( popupSize.width && popupSize.height )
     {
+        if ( popupSize.width == -1 && popupSize.height == -1 )
+        {
+            popupSize.width = width;
+            popupSize.height = height;
+            return( popupSize );
+        }
         if ( width || height )
             Warning( "Ignoring passed dimensions "+width+"x"+height+" when getting popup size for tag '"+tag+"'"  );
         return( popupSize );

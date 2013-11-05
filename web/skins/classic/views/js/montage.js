@@ -137,6 +137,19 @@ function changeScale()
     Cookie.write( 'zmMontageScale', scale, { duration: 10*365 } );
 }
 
+function resizeMontageWindow()
+{
+    var w = window, d = document, e = d.documentElement, g = d.getElementsByTagName('body')[0],
+        x = w.innerWidth || e.clientWidth || g.clientWidth,
+        y = w.innerHeight || e.clientHeight || g.clientHeight;
+    var newSize = x+'x'+y;
+    console.log("Setting new montage window size to " + newSize);
+    Cookie.write( 'zmMontageWindowSize', newSize, { duration: 10*365 } );
+    // refresh parent window so montage link will have updated size based on cookie values
+    refreshParentWindow();
+}
+
+
 var monitors = new Array();
 function initPage()
 {
@@ -147,6 +160,12 @@ function initPage()
         monitors[i].start( delay );
     }
     selectLayout( $('layout') );
+    // setup resize event on a timer to prevent excessive firing
+    var resizeTimer;
+    window.addEvent('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = (function() { resizeMontageWindow(); }).delay(500);
+    });
 }
 
 // Kick everything off

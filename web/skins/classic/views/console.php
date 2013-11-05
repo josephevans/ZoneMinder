@@ -204,8 +204,13 @@ if ( canView( 'System' ) )
 if ( canView( 'Stream' ) && $cycleCount > 1 )
 {
     $cycleGroup = isset($_COOKIE['zmGroup'])?$_COOKIE['zmGroup']:0;
+    $montageParams = 'montage';
+    if ( isset( $_COOKIE['zmMontageWindowSize']) && preg_match("/^\d{1,5}x\d{1,5}$/", $_COOKIE['zmMontageWindowSize']) )
+    {
+        $montageParams = array_merge(array('montage'), preg_split("/x{1}/", $_COOKIE['zmMontageWindowSize']));
+    }
 ?>
-      <div id="cycleMontage"><?= makePopupLink( '?view=cycle&amp;group='.$cycleGroup, 'zmCycle'.$cycleGroup, array( 'cycle', $cycleWidth, $cycleHeight ), $SLANG['Cycle'], $running ) ?>&nbsp;/&nbsp;<?= makePopupLink( '?view=montage&amp;group='.$cycleGroup, 'zmMontage'.$cycleGroup, 'montage', $SLANG['Montage'], $running ) ?></div>
+      <div id="cycleMontage"><?= makePopupLink( '?view=cycle&amp;group='.$cycleGroup, 'zmCycle'.$cycleGroup, array( 'cycle', $cycleWidth, $cycleHeight ), $SLANG['Cycle'], $running ) ?>&nbsp;/&nbsp;<?= makePopupLink( '?view=montage&amp;group='.$cycleGroup, 'zmMontage'.$cycleGroup, $montageParams, $SLANG['Montage'], $running ) ?></div>
 <?php
 }
 else
